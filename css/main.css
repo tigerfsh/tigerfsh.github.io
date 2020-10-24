@@ -178,7 +178,7 @@ body {
   background: var(--body-bg-color);
   color: var(--text-color);
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 1em;
+  font-size: 1.3em;
   line-height: 1.7;
 }
 @media (max-width: 991px) {
@@ -1191,7 +1191,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #fffffb;
+  background: #def6e8;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
