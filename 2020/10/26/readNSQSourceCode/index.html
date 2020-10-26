@@ -22,28 +22,36 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":200,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="gofish">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="架构 NSQ is a realtime distributed messaging platform designed to operate at scale, handling billions of messages per day.  NSQ是go语言体系中较为知名的消息中间件，由三个主要组件构成，分别是nsqd，nsqlookupd和nsqadmin。  nsqd是一个负责接收消息，存储">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSQ解读">
+<meta property="og:url" content="http://example.com/2020/10/26/readNSQSourceCode/index.html">
 <meta property="og:site_name" content="gofish">
+<meta property="og:description" content="架构 NSQ is a realtime distributed messaging platform designed to operate at scale, handling billions of messages per day.  NSQ是go语言体系中较为知名的消息中间件，由三个主要组件构成，分别是nsqd，nsqlookupd和nsqadmin。  nsqd是一个负责接收消息，存储">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fbelisk.github.io/images/nsq.gif">
+<meta property="article:published_time" content="2020-10-26T09:54:57.000Z">
+<meta property="article:modified_time" content="2020-10-26T10:01:29.210Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="nsq">
+<meta property="article:tag" content="mq">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fbelisk.github.io/images/nsq.gif">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2020/10/26/readNSQSourceCode/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>gofish</title>
+  <title>NSQ解读 | gofish</title>
   
 
 
@@ -160,289 +168,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/24/0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="gofish">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/24/0/" class="post-title-link" itemprop="url">Hello World (1)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-24 03:03:41" itemprop="dateCreated datePublished" datetime="2020-10-24T03:03:41+00:00">2020-10-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.<br>When I’m solving a problem, especially if it’s a new problem, I don’t initially think about whether
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/10/24/0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/23/2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="gofish">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/23/2/" class="post-title-link" itemprop="url">Hello World (3)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-23 11:26:51" itemprop="dateCreated datePublished" datetime="2020-10-23T11:26:51+00:00">2020-10-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/10/23/2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/23/1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="gofish">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/23/1/" class="post-title-link" itemprop="url">Hello World (2)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-23 11:26:36" itemprop="dateCreated datePublished" datetime="2020-10-23T11:26:36+00:00">2020-10-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/10/23/1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/26/readNSQ/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="gofish">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/26/readNSQ/" class="post-title-link" itemprop="url">readNSQ</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-10-26 09:54:57 / 修改时间：09:59:07" itemprop="dateCreated datePublished" datetime="2020-10-26T09:54:57+00:00">2020-10-26</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -458,10 +187,9 @@
       <meta itemprop="name" content="gofish">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/26/readNSQSourceCode/" class="post-title-link" itemprop="url">NSQ解读</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          NSQ解读
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -484,6 +212,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -494,7 +229,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h1><blockquote>
+        <h1 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h1><blockquote>
 <p><strong>NSQ</strong> is a realtime distributed messaging platform designed to operate at scale, handling billions of messages per day.</p>
 </blockquote>
 <p>NSQ是go语言体系中较为知名的消息中间件，由三个主要组件构成，分别是nsqd，nsqlookupd和nsqadmin。</p>
@@ -548,27 +283,44 @@
 <p>这块就跟上面刚提到的处理<code>SUB</code>的逻辑衔接起来。<code>p.SendMessage</code>把从队列中读到的消息推送给<code>consumer</code>。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>消息的传递过程：从<code>topic</code>到<code>channel</code>的广播模式，从<code>channel</code>到<code>consumer</code>的随机模式。</p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+          <div class="post-tags">
+              <a href="/tags/nsq/" rel="tag"># nsq</a>
+              <a href="/tags/mq/" rel="tag"># mq</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/24/0/" rel="prev" title="Hello World (1)">
+      <i class="fa fa-chevron-left"></i> Hello World (1)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/26/readNSQ/" rel="next" title="readNSQ">
+      readNSQ <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
+    
   </article>
   
   
   
 
 
-  
-
-
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -615,6 +367,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%84%E6%88%90"><span class="nav-number">2.</span> <span class="nav-text">组成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E5%92%8C%E6%8E%A5%E6%94%B6%E6%B6%88%E6%81%AF"><span class="nav-number">3.</span> <span class="nav-text">发送和接收消息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Main"><span class="nav-number">3.1.</span> <span class="nav-text">Main</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCPServer"><span class="nav-number">3.2.</span> <span class="nav-text">TCPServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handle"><span class="nav-number">3.3.</span> <span class="nav-text">Handle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IOLoop"><span class="nav-number">3.4.</span> <span class="nav-text">IOLoop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PUB"><span class="nav-number">3.5.</span> <span class="nav-text">PUB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GetTopic"><span class="nav-number">3.6.</span> <span class="nav-text">GetTopic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NewTopic"><span class="nav-number">3.7.</span> <span class="nav-text">NewTopic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#t-messagePump"><span class="nav-number">3.8.</span> <span class="nav-text">t.messagePump</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c-PutMessage"><span class="nav-number">3.9.</span> <span class="nav-text">c.PutMessage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SUB"><span class="nav-number">3.10.</span> <span class="nav-text">SUB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p-messagePump"><span class="nav-number">3.11.</span> <span class="nav-text">p.messagePump</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -792,6 +545,25 @@ window.addEventListener('pjax:success', () => {
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'eceff994ba5b8b5579c7',
+      clientSecret: '4198e446597507dd8d18abfd62a9098836494251',
+      repo        : 'gofishComments',
+      owner       : 'tigerfsh',
+      admin       : ['tigerfsh'],
+      id          : '28f40b4db49becabeb2b009f856a694d',
+        language: 'zh-Cn',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
     </div>
 </body>
